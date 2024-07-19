@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ITEM LIST</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        /* Custom CSS for item list */
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Arial', sans-serif; /* Font for the entire document */
+            color: #333; /* Default text color */
+        }
+
+        body {
+            background-image: url(''); /* Replace with your image URL */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .overlay {
+            background-color: rgba(255, 255, 255, 0.9); /* White overlay with transparency */
+            min-height: 100vh; /* Ensure overlay covers the entire viewport */
+            padding-top: 20px; /* Space from the top */
+        }
+
+        .container {
+            background-color: #ffffff; /* White background for the container */
+            padding: 20px; /* Padding inside the container */
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Soft shadow */
+            margin-top: 20px; /* Space from the top */
+            animation: fadeIn 1s ease-in-out; /* Fade in animation for the container */
+        }
+
+        .list-group {
+            list-style-type: none; /* Remove default list styles */
+            padding: 0; /* Remove default padding */
+        }
+
+        .list-group-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #dee2e6; /* Light border */
+            border-radius: 8px; /* Rounded corners */
+            background-color: #fff; /* White background */
+            animation: fadeInUp 0.5s ease-in-out; /* Fade in animation for list items */
+        }
+
+        .item-image {
+            flex: 0 0 240px; /* Fixed width for image column */
+            margin-right: 20px;
+            overflow: hidden; /* Ensure images are within bounds */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .item-image img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease-in-out; /* Smooth image scaling on hover */
+        }
+
+        .item-image:hover img {
+            transform: scale(1.1); /* Scale up image on hover */
+        }
+
+        .item-content {
+            flex: 1 1 auto;
+        }
+
+        .item-content h5 {
+            margin-bottom: 5px;
+            color: #007bff; /* Blue heading color */
+        }
+
+        .item-content p {
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .item-actions {
+            flex: 0 0 auto;
+            display: flex;
+            align-items: center;
+        }
+
+        .item-actions a {
+            margin-right: 10px;
+            font-size: 12px; /* Smaller font size for buttons */
+        }
+
+        .btn-outline-primary,
+        .btn-outline-danger {
+            font-size: 12px; /* Smaller font size for buttons */
+            transition: opacity 0.3s ease-in-out; /* Smooth transition on opacity change */
+        }
+
+        .btn-outline-primary:hover,
+        .btn-outline-danger:hover {
+            opacity: 0.8; /* Reduce opacity on hover */
+        }
+
+        .btn-primary {
+            background-color: #007bff; /* Primary button color */
+            border-color: #007bff; /* Primary button border color */
+            transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out; /* Smooth transition on background and border color change */
+        }
+
+        .btn-primary:hover {
+            background-color: #0069d9; /* Darker shade on hover */
+            border-color: #0062cc; /* Darker shade on hover */
+        }
+    </style>
+</head>
+<body>
+    <style>
+        p {
+          background-image: url('IMG.jpg');
+        }
+        </style>
+    <div class="overlay">
+        <div class="container animate__animated animate__fadeIn">
+            <h1 class="mb-4">ITEM LIST</h1>
+            <ul class="list-group">
+                {% for item in items %}
+                <li class="list-group-item">
+                    <div class="item-image">
+                        <img src="{{ item.image.url }}" alt="{{ item.name }}" class="img-fluid">
+                    </div>
+                    <div class="item-content">
+                        <h5>{{ item.name }}</h5>
+                        <p>{{ item.description }}</p>
+                    </div>
+                    <div class="item-actions">
+                        <a href="{% url 'item_update' item.pk %}" class="btn btn-sm btn-outline-primary animate__animated animate__fadeInLeft">Edit</a>
+                        <a href="{% url 'item_delete' item.pk %}" class="btn btn-sm btn-outline-danger animate__animated animate__fadeInRight">Delete</a>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+            <a href="{% url 'item_create' %}" class="btn btn-primary mt-3 animate__animated animate__fadeInUp">Add new item</a>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS (if needed) - place at the end of the body for faster page loading -->
+    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script> -->
+</body>
+</html>
